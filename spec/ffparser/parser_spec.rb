@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe FFParser::Parser do
-  describe '.parse' do
+  describe '#parse' do
     let(:record_class) { double('record_class') }
     let(:record_instance) { double('record_instance') }
     let(:expected_rows) do
@@ -14,7 +14,8 @@ describe FFParser::Parser do
 
     it "raises a parse error on invalid csv" do
       allow(record_class).to receive(:valid?) { false }
-      expect{described_class.parse(record_class, "spec/test_data/test_comma.txt", :comma)}
+      parser = described_class.new("spec/test_data/test_comma.txt")
+      expect{parser.parse(record_class, :comma)}
         .to raise_exception(FFParser::Parser::ParseError)
     end
 
@@ -24,13 +25,10 @@ describe FFParser::Parser do
           expect(record_class).to receive(:valid?).with(row) { true }
           expect(record_class).to receive(:new).with(row) { record_instance }
         end
-        result = described_class.parse(
-          record_class, "spec/test_data/test_comma.txt", :comma
-        )
+        parser = described_class.new("spec/test_data/test_comma.txt")
+        result = parser.parse(record_class, :comma)
         expect(result).to match_array([
-          record_instance,
-          record_instance,
-          record_instance
+          record_instance, record_instance, record_instance
         ])
       end
     end
@@ -41,13 +39,10 @@ describe FFParser::Parser do
           expect(record_class).to receive(:valid?).with(row) { true }
           expect(record_class).to receive(:new).with(row) { record_instance }
         end
-        result = described_class.parse(
-          record_class, "spec/test_data/test_pipe.txt", :pipe
-        )
+        parser = described_class.new("spec/test_data/test_pipe.txt")
+        result = parser.parse(record_class, :pipe)
         expect(result).to match_array([
-          record_instance,
-          record_instance,
-          record_instance
+          record_instance, record_instance, record_instance
         ])
       end
     end

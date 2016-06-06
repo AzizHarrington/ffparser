@@ -1,17 +1,17 @@
 require "spec_helper"
 require "rack/test"
 
-describe API do
+describe RecordAPI do
   include Rack::Test::Methods
 
   def app
-    API
+    RecordAPI
   end
 
   let(:client) { double("client") }
 
   before :each do
-    expect(FFParser::Client)
+    allow(FFParser::Client)
       .to receive(:new)
       .with("data/records.txt", :csv) { client }
   end
@@ -63,10 +63,12 @@ describe API do
 
   context "POST /records" do
     it "creates a new record" do
-      skip
-      record = {}
-      post "/records", "hello world"
-      expect(last_response.body).to eq 201
+      expect(FFParser::Client).to_not receive(:new)
+      record = "foo, bar, baz, green, 08/21/1986"
+      expect(FFParser::Client)
+        .to receive(:save_record).with("data/records.txt", record)
+      post "/records", "record=#{record}"
+      expect(last_response.status).to eq 201
     end
   end
 end

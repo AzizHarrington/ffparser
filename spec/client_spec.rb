@@ -37,4 +37,13 @@ describe FFParser::Client do
       expect{subject.sort(["first_name"], :asc, :html)}.to raise_error(ArgumentError)
     end
   end
+
+  describe "#save" do
+    it "writes record and updates database" do
+      writer = double('writer')
+      allow(FFParser::Writer).to receive(:new).with("path") { writer }
+      expect(writer).to receive(:write_record).with("record string")
+      described_class.save_record("path", "record string")
+    end
+  end
 end
