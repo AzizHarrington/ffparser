@@ -17,6 +17,10 @@ How to run
 
 In terminal, `cd` into project directory and run `bundle install` to install gem dependencies.
 
+Data
+----
+Test data in both comma and pipe seperated files can be found in `data/`.
+
 
 API
 ---

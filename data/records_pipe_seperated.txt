@@ -1,0 +1,6 @@
+LastName | FirstName | Gender | FavoriteColor | DateOfBirth
+smith | bob | male | yellow | 03/30/1980
+jones | sarah | female | red | 05/31/1978
+williams | joseph | male | blue | 09/03/1988
+daniels | dan | male | red | 10/15/1972
+evans | mary | female | green | 6/24/1980
