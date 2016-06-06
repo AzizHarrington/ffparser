@@ -32,7 +32,7 @@ sort_by = options[:sort_by]
 order = options[:order] == "desc" ? :desc : :asc
 delimiter = options[:delimeter] == "pipe" ? :pipe : :comma
 
-client = Client.new(file_name, delimiter)
+client = FFParser::Client.new(file_name, delimiter)
 puts "\n"
 puts client.sort(sort_by, order, :text)
 puts "\n"

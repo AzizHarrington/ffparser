@@ -1,7 +1,7 @@
 require "spec_helper"
 require "time"
 
-describe Record do
+describe FFParser::Record do
   describe ".valid?" do
     context "when param hash keys are missing" do
       it "returns false" do
@@ -49,9 +49,22 @@ describe Record do
   end
 
   describe "#to_s" do
-    it "it renders self to string" do
+    it "renders self to string" do
       expected = "Name: Bar Foo, Gender: baz, Favorite Color: grey, Birthday: 10/21/1990"
       expect(subject.to_s).to eq(expected)
+    end
+  end
+
+  describe "#to_h" do
+    it "returns hash representation" do
+      expected = {
+        last_name: "foo",
+        first_name: "bar",
+        gender: "baz",
+        favorite_color: "grey",
+        date_of_birth: "10/21/1990"
+      }
+      expect(subject.to_h).to eq(expected)
     end
   end
 end

@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Client do
+describe FFParser::Client do
 
-  subject { described_class.new("spec/files/record.txt", :comma) }
+  subject { described_class.new("spec/test_data/records.txt", :comma) }
 
   describe "#sort" do
     it "sorts data and returns result rendered as text" do
@@ -16,6 +16,25 @@ describe Client do
       ].join("\n")
       result = subject.sort(["first_name"], :asc, :text)
       expect(result).to eq(expected)
+    end
+
+    it "sorts data and returns as hash_array" do
+      result = subject.sort(["first_name"], :asc, :hash_array)
+      expect(result.first).to eq({
+        :last_name=>"smith",
+        :first_name=>"bob",
+        :gender=>"male",
+        :favorite_color=>"yellow",
+        :date_of_birth=>"3/30/1980"
+      })
+    end
+
+    it "raises exception for invalid order" do
+      expect{subject.sort(["first_name"], :any, :text)}.to raise_error(ArgumentError)
+    end
+
+    it "raises exception for invalid output_format" do
+      expect{subject.sort(["first_name"], :asc, :html)}.to raise_error(ArgumentError)
     end
   end
 end

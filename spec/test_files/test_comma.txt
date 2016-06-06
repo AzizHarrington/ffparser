@@ -1,4 +1,0 @@
-ColumnOne, ColumnTwo, ColumnThree
-a, a, a
-b, b, b
-c, c, c

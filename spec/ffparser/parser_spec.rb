@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Parser do
+describe FFParser::Parser do
   describe '.parse' do
     let(:record_class) { double('record_class') }
     let(:record_instance) { double('record_instance') }
@@ -14,8 +14,8 @@ describe Parser do
 
     it "raises a parse error on invalid csv" do
       allow(record_class).to receive(:valid?) { false }
-      expect{described_class.parse(record_class, "spec/files/test_comma.txt", :comma)}
-        .to raise_exception(Parser::ParseError)
+      expect{described_class.parse(record_class, "spec/test_data/test_comma.txt", :comma)}
+        .to raise_exception(FFParser::Parser::ParseError)
     end
 
     context "when comma delimited file" do
@@ -25,7 +25,7 @@ describe Parser do
           expect(record_class).to receive(:new).with(row) { record_instance }
         end
         result = described_class.parse(
-          record_class, "spec/files/test_comma.txt", :comma
+          record_class, "spec/test_data/test_comma.txt", :comma
         )
         expect(result).to match_array([
           record_instance,
@@ -42,7 +42,7 @@ describe Parser do
           expect(record_class).to receive(:new).with(row) { record_instance }
         end
         result = described_class.parse(
-          record_class, "spec/files/test_pipe.txt", :pipe
+          record_class, "spec/test_data/test_pipe.txt", :pipe
         )
         expect(result).to match_array([
           record_instance,

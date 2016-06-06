@@ -1,22 +1,26 @@
-require_relative "database"
-require_relative "parser"
-require_relative "record"
-require_relative "renderer"
+require_relative "ffparser/database"
+require_relative "ffparser/parser"
+require_relative "ffparser/record"
+require_relative "ffparser/renderer"
 
-class Client
-  def initialize(file_path, delimiter)
-    @database = set_database(file_path, delimiter)
-  end
+module FFParser
+  class Client
+    def initialize(file_path, delimiter)
+      @database = set_database(file_path, delimiter)
+    end
 
-  def sort(fields, order, output_format)
-    Renderer.render(
-      @database.sort_by(fields, order),
-      output_format
-    )
-  end
+    def sort(fields, order, output_format)
+      raise ArgumentError unless [:asc, :desc].include?(order)
+      raise ArgumentError unless [:text, :hash_array].include?(output_format)
+      Renderer.render(
+        @database.sort_by(fields, order),
+        output_format
+      )
+    end
 
-  def set_database(file_path, delimiter)
-    data = Parser.parse(Record, file_path, delimiter)
-    Database.new(data)
+    def set_database(file_path, delimiter)
+      data = Parser.parse(Record, file_path, delimiter)
+      Database.new(data)
+    end
   end
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'time'
 
 
-describe Database do
+describe FFParser::Database do
 
   subject { described_class.new(data) }
 
