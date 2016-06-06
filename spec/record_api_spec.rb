@@ -11,15 +11,12 @@ describe RecordAPI do
   let(:client) { double("client") }
 
   before :each do
-    allow(FFParser::Client)
-      .to receive(:new)
-      .with("data/records.txt", :csv) { client }
+    allow(FFParser::Client).to receive(:new).with("data/records.txt", :csv) { client }
   end
 
   context "GET /records/gender" do
     it "returns a json array of records sorted by gender" do
-      expect(client)
-        .to receive(:sort)
+      expect(client).to receive(:sort_by)
         .with(["gender"], :asc, :hash_array) { [{record: 1}, {record: 2}] }
 
       get "/records/gender"
@@ -33,8 +30,7 @@ describe RecordAPI do
 
   context "GET /records/birthdate" do
     it "returns a json array of records sorted by birthdate" do
-      expect(client)
-        .to receive(:sort)
+      expect(client).to receive(:sort_by)
         .with(["date_of_birth"], :asc, :hash_array) { [{record: 1}, {record: 2}] }
 
       get "/records/birthdate"
@@ -48,8 +44,7 @@ describe RecordAPI do
 
   context "GET /records/name" do
     it "returns a json array of records sorted by name" do
-      expect(client)
-        .to receive(:sort)
+      expect(client).to receive(:sort_by)
         .with(["last_name", "first_name"], :asc, :hash_array) { [{record: 1}, {record: 2}] }
 
       get "/records/name"
@@ -63,10 +58,8 @@ describe RecordAPI do
 
   context "POST /records" do
     it "creates a new record" do
-      expect(FFParser::Client).to_not receive(:new)
       record = "foo, bar, baz, green, 08/21/1986"
-      expect(FFParser::Client)
-        .to receive(:save_record).with("data/records.txt", record)
+      expect(client).to receive(:save_record).with(record)
       post "/records", "record=#{record}"
       expect(last_response.status).to eq 201
     end

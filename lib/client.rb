@@ -7,27 +7,33 @@ require_relative "ffparser/writer"
 module FFParser
   class Client
     def initialize(file_path, delimiter)
-      @parser = Parser.new(file_path)
-      @database = set_database(delimiter)
+      @parser = Parser.new(file_path, delimiter, Record)
+      @writer = Writer.new(file_path, delimiter, Record)
     end
 
-    def self.save_record(file_path, record_string)
-      Writer.new(file_path).write_record(record_string)
+    def sort_by(fields, order, output_format)
+      raise ArgumentError, "invalid order" unless valid_order?(order)
+      raise ArgumentError, "invalid output_format" unless valid_output_format?(output_format)
+      result = database.sort_by(fields, order)
+      Renderer.render(result, output_format)
     end
 
-    def sort(fields, order, output_format)
-      raise ArgumentError unless [:asc, :desc].include?(order)
-      raise ArgumentError unless [:text, :hash_array].include?(output_format)
-      Renderer.render(
-        @database.sort_by(fields, order),
-        output_format
-      )
+    def save_record(record_string)
+      @writer.write_record(record_string)
     end
 
     private
 
-    def set_database(delimiter)
-      Database.new(@parser.parse(Record, delimiter))
+    def database
+      @database ||= Database.new(@parser.parse)
+    end
+
+    def valid_order?(order)
+      [:asc, :desc].include?(order)
+    end
+
+    def valid_output_format?(output_format)
+      [:text, :hash_array].include?(output_format)
     end
   end
 end

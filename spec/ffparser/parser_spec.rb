@@ -14,9 +14,8 @@ describe FFParser::Parser do
 
     it "raises a parse error on invalid csv" do
       allow(record_class).to receive(:valid?) { false }
-      parser = described_class.new("spec/test_data/test_comma.txt")
-      expect{parser.parse(record_class, :comma)}
-        .to raise_exception(FFParser::Parser::ParseError)
+      parser = described_class.new("spec/test_data/test_comma.txt", :comma, record_class)
+      expect{parser.parse}.to raise_exception(FFParser::Parser::ParseError)
     end
 
     context "when comma delimited file" do
@@ -25,9 +24,8 @@ describe FFParser::Parser do
           expect(record_class).to receive(:valid?).with(row) { true }
           expect(record_class).to receive(:new).with(row) { record_instance }
         end
-        parser = described_class.new("spec/test_data/test_comma.txt")
-        result = parser.parse(record_class, :comma)
-        expect(result).to match_array([
+        parser = described_class.new("spec/test_data/test_comma.txt", :comma, record_class)
+        expect(parser.parse).to match_array([
           record_instance, record_instance, record_instance
         ])
       end
@@ -39,9 +37,8 @@ describe FFParser::Parser do
           expect(record_class).to receive(:valid?).with(row) { true }
           expect(record_class).to receive(:new).with(row) { record_instance }
         end
-        parser = described_class.new("spec/test_data/test_pipe.txt")
-        result = parser.parse(record_class, :pipe)
-        expect(result).to match_array([
+        parser = described_class.new("spec/test_data/test_pipe.txt", :pipe, record_class)
+        expect(parser.parse).to match_array([
           record_instance, record_instance, record_instance
         ])
       end

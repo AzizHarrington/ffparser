@@ -21,7 +21,10 @@ OptionParser.new do |opts|
     puts opts
     puts "\n"
     puts "example usage:"
-    puts "    ruby ffparser_cli -f path_to_file.txt -s fielda,fieldb -o desc, -d pipe"
+    puts "    ruby ffparser_cli -f path/to/file -s fielda,fieldb -o desc, -d pipe"
+    puts "\n"
+    puts "sortable fields:"
+    puts "    last_name, first_name, gender, favorite_color, date_of_birth"
     puts "\n"
     exit
   end
@@ -34,5 +37,5 @@ delimiter = options[:delimeter] == "pipe" ? :pipe : :comma
 
 client = FFParser::Client.new(file_name, delimiter)
 puts "\n"
-puts client.sort(sort_by, order, :text)
+puts client.sort_by(sort_by, order, :text)
 puts "\n"

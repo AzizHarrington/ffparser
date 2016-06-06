@@ -4,10 +4,10 @@ module FFParser
   class Record
     attr_reader :last_name, :first_name, :gender, :favorite_color, :date_of_birth
 
-    @required = [:last_name, :first_name, :gender, :favorite_color, :date_of_birth]
+    @fields = [:last_name, :first_name, :gender, :favorite_color, :date_of_birth]
 
     def self.valid?(args)
-      @required.all? { |key| args.key?(key) }
+      @fields.all? { |key| args.key?(key) }
     end
 
     def initialize(args)

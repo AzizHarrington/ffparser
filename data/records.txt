@@ -4,5 +4,3 @@ jones, sarah, female, red, 05/31/1978
 williams, joseph, male, blue, 09/03/1988
 daniels, dan, male, red, 10/15/1972
 evans, mary, female, green, 6/24/1980
-poe, edgar, male, black, 01/19/1809
-poe, edgar, male, black, 01/19/1809
