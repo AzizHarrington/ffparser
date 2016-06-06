@@ -6,8 +6,8 @@ class RecordAPI < Grape::API
   # Also allows posting a new record as a string
   format :json
 
-  PATH = "data/records.txt"
-  DELIMITER = :comma
+  PATH = "data/records.txt" # Change this to point at file path with your data
+  DELIMITER = :comma # Change this to desired delimiter format (:comma OR :pipe)
 
   helpers do
     def client
