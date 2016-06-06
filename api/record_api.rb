@@ -5,7 +5,7 @@ class RecordAPI < Grape::API
   format :json
 
   PATH = "data/records.txt"
-  DELIMITER = :csv
+  DELIMITER = :comma
 
   helpers do
     def client
@@ -35,6 +35,7 @@ class RecordAPI < Grape::API
     end
     post do
       client.save_record(params[:record])
+      {status: "ok"}
     end
   end
 end

@@ -11,7 +11,7 @@ describe RecordAPI do
   let(:client) { double("client") }
 
   before :each do
-    allow(FFParser::Client).to receive(:new).with("data/records.txt", :csv) { client }
+    allow(FFParser::Client).to receive(:new) { client }
   end
 
   context "GET /records/gender" do

@@ -28,6 +28,14 @@ describe FFParser::Record do
     end
   end
 
+  describe ".fields" do
+    it "returns record fields" do
+      expect(described_class.fields).to eq(
+        [:last_name, :first_name, :gender, :favorite_color, :date_of_birth]
+      )
+    end
+  end
+
   subject do
     described_class.new(
       last_name: "foo",

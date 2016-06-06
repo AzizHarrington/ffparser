@@ -30,8 +30,17 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-file_name = options[:file_name]
 sort_by = options[:sort_by]
+valid_fields = ["last_name", "first_name", "gender", "favorite_color", "date_of_birth"]
+if !sort_by.all? { |field| valid_fields.include?(field) }
+  puts "\n"
+  puts "Invalid field(s): #{sort_by}"
+  puts "run 'ruby ffparser_cli.rb --help' to see available fields for sorting"
+  puts "\n"
+  exit
+end
+
+file_name = options[:file_name]
 order = options[:order] == "desc" ? :desc : :asc
 delimiter = options[:delimeter] == "pipe" ? :pipe : :comma
 
