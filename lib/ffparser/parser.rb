@@ -2,6 +2,8 @@ require 'csv'
 
 module FFParser
   class Parser
+    # Contains logic for parsing CSV of record data and returning
+    # array of record instances
     class ParseError < StandardError
       @message = "File invalid! must have headers and be '|' or ',' delimited."
       def initialize(msg=message)

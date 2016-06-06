@@ -2,6 +2,7 @@ require "time"
 
 module FFParser
   class Record
+    # Holds data and logic for validation & display
     attr_reader :last_name, :first_name, :gender, :favorite_color, :date_of_birth
 
     def self.fields

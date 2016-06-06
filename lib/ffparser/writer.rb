@@ -1,5 +1,9 @@
 module FFParser
   class Writer
+    # Contains logic for initializing a flat file with appropriate headers
+    # and writing a single record to the end of a file.
+    # Record strings are automatically converted to match the set delimiter
+    # before writing.
     def initialize(file_path, delimiter, record_class)
       @file_path = file_path
       @delimiter = delimiter

@@ -1,6 +1,8 @@
 require "optparse"
 require_relative "lib/client"
 
+# Command line interface script for using FFParser 
+
 options = {}
 OptionParser.new do |opts|
   opts.on("-f", "--file_name=FILENAME", "(REQUIRED) path to local record csv") do |opt|

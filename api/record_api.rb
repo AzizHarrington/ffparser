@@ -2,6 +2,8 @@ require 'grape'
 require_relative '../lib/client'
 
 class RecordAPI < Grape::API
+  # A simple API exposing records sorted by gender, name, and birthdate.
+  # Also allows posting a new record as a string
   format :json
 
   PATH = "data/records.txt"

@@ -1,5 +1,6 @@
 module FFParser
   class Database
+    # Maintains state of record data and provides sorting functionality.
     attr_reader :data
 
     def initialize(data)
