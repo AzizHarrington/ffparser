@@ -40,6 +40,7 @@ Command Line
 ------------
 
 Example Usage:
-- `ruby ffparser_cli -f path/to/file -s fielda,fieldb -o desc, -d pipe`
+- `ruby ffparser_cli.rb -f path/to/file -s fielda,fieldb -o desc, -d pipe`
+- `ruby ffparser_cli.rb -f data/records.txt -s gender,last_name -o asc -d comma` to return records sorted in ascending order by gender, then last_name.
 
 Run `ruby ffparser_cli.rb --help` for an overview of options.

@@ -32,7 +32,9 @@ module FFParser
     end
 
     def header_string
-      @record_class.fields.map{ |field| to_camel_case(field) }.join(get_delimiter)
+      @record_class.fields.map do |field|
+        to_camel_case(field)
+      end.join(get_delimiter)
     end
 
     def to_camel_case(header)

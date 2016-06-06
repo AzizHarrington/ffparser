@@ -3,10 +3,11 @@ require "time"
 module FFParser
   class Record
     # Holds data and logic for validation & display
-    attr_reader :last_name, :first_name, :gender, :favorite_color, :date_of_birth
+    FIELDS = [:last_name, :first_name, :gender, :favorite_color, :date_of_birth]
+    attr_reader(*FIELDS)
 
     def self.fields
-      [:last_name, :first_name, :gender, :favorite_color, :date_of_birth]
+      FIELDS
     end
 
     def self.valid?(args)

@@ -7,6 +7,7 @@ require_relative "ffparser/writer"
 module FFParser
   class Client
     # Client providing abstractions for parsing & sorting, and saving records
+    # TODO: remove need for explicit delimiter declaration. Auto-detect.
     def initialize(file_path, delimiter)
       @parser = Parser.new(file_path, delimiter, Record)
       @writer = Writer.new(file_path, delimiter, Record)
