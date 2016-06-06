@@ -26,15 +26,15 @@ API
 ---
 
 To run the API locally:
-- `$ rackup`
+- `rackup`
 
 This will start a local rack server at port 9292.
 
-The following commands can be used for testing (requires `curl` is installed):
-- `$ curl http://localhost:9292/records/name` for records sorted by name
-- `$ curl http://localhost:9292/records/gender` for records sorted by gender
-- `$ curl http://localhost:9292/records/birthdate` for records sorted by birthdate
-- `$ curl --data "record=lee,bruce,male,blue,11/27/1940" http://localhost:9292/records` to post a new record and append it to data file
+The following commands can be used for testing (requires `curl` to be installed):
+- `curl http://localhost:9292/records/name` for records sorted by name
+- `curl http://localhost:9292/records/gender` for records sorted by gender
+- `curl http://localhost:9292/records/birthdate` for records sorted by birthdate
+- `curl --data "record=lee,bruce,male,blue,11/27/1940" http://localhost:9292/records` to post a new record and append it to data file
 
 Command Line
 ------------
@@ -42,4 +42,4 @@ Command Line
 Example Usage:
 - `ruby ffparser_cli -f path/to/file -s fielda,fieldb -o desc, -d pipe`
 
-From within project directory enter `ruby ffparser_cli.rb --help` for help.
+Run `ruby ffparser_cli.rb --help` for help.
