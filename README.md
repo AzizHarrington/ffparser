@@ -42,4 +42,4 @@ Command Line
 Example Usage:
 - `ruby ffparser_cli -f path/to/file -s fielda,fieldb -o desc, -d pipe`
 
-Run `ruby ffparser_cli.rb --help` for help.
+Run `ruby ffparser_cli.rb --help` for an overview of options.
